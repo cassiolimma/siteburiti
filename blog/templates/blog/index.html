@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- INICIO SESSAO CONTEUDO -->
+    <section class="container">
+
+          <!-- Blog Entries Column -->
+          <div class="col-md-8">
+
+              <div class="row">
+
+                {% for post in posts %}
+                <div class="col-xs-12 col-sm-6">
+                    <!-- First Blog Post -->
+                    <figure class="thumbnail">
+                        <a href="{{ post.get_absolute_url }}">
+                          <img class="img-responsive" src="{{ post.image.url }}">
+                          <figcaption class="caption">
+                            <h3>{{ post.title }}</h3>
+                            <p><span class="glyphicon glyphicon-time"></span>Postado em {{ post.date_post }}</p>
+                          </figcaption>
+                        </a>
+                    </figure>
+                </div>
+
+                {% empty %}
+                <div class="col-xs-12 col-sm-12">
+                    <h2>Em breve teremos conteúdo!</h2>
+                    <hr>
+                </div>
+                {% endfor %}
+              </div>
+
+              <ul class="pager">
+                  {% if posts.has_previous %}
+                  <li class="previous">
+                      <a href="?page={{ posts.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&larr; Voltar</a>
+                  </li>
+                  {% else %}
+                  <li class="previous disabled">
+                      <a href="#">&larr; Voltar</a>
+                  </li>
+                  {% endif %}
+
+                  <span class="current">
+                    Página {{ posts.number }} de {{ posts.paginator.num_pages }}.
+                  </span>
+
+                  {% if posts.has_next %}
+                  <li class="next">
+                      <a href="?page={{ posts.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Avançar &rarr;</a>
+                  </li>
+                  {% else %}
+                  <li class="next disabled">
+                      <a href="#">Avançar &rarr;</a>
+                  </li>
+                  {% endif %}
+              </ul>
+
+          </div>
+
+          <!-- Blog Sidebar Widgets Column -->
+          <div class="col-md-4">
+
+              <!-- Blog Search Well -->
+              <div class="well">
+                  <h4>Faça uma busca no site</h4>
+                    <form method="GET" action="">
+                      <div class="input-group">
+                        <input class="form-control" type="text" placeholder="Pesquisar" name="q" value="{{ request.GET.q }}">
+                        <span class="input-group-btn">
+                          <button class="btn btn-default" type="submit" value="Search">
+                              <span class="glyphicon glyphicon-search"></span>
+                          </button>
+                        </span>
+                      </div>
+                    </form>
+                  <!-- /.input-group -->
+              </div>
+              
+              <!-- Blog Categories Well -->
+              <div class="well">
+                  <h4>Congregações</h4>
+                  <div class="row">
+                      <div class="col-lg-6">
+                          <ul class="list-unstyled">
+                              <li><a href="#">Betel</a>
+                              </li>
+                              <li><a href="#">Nova Jerusalém</a>
+                              </li>
+                              <li><a href="#">Nova Sião</a>
+                              </li>
+                              <li><a href="#">Vale de Benção</a>
+                              </li>
+                          </ul>
+                      </div>
+                      
+                  </div>
+                  <!-- /.row -->
+              </div>
+
+              <!-- Side Widget Well -->
+                <div class="well">
+                    <h4>Reflexão</h4>
+                    <p>"Aquele que encontra uma esposa, acha o bem, e alcança a benevolência do Senhor."
+                    (Provérbios 18:22)</p>
+                </div>
+
+          </div>
+
+    </section><!-- FIM SESSAO CONTEUDO -->
+
+{% endblock %}

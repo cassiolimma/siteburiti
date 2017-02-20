@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- INICIO SESSAO CONTEUDO -->
+    <section class="container">
+      
+      <div class="row">
+            <div class="container">
+                <h1><span class="glyphicon glyphicon-facetime-video"></span>&nbsp Vídeos</h1>
+                <hr>
+            </div>
+            <!-- Blog Post Content Column -->
+            <div class="col-md-12">
+                {% for video in videos %}
+                <div class="col-xs-12 col-sm-4">
+                    <div class="panel panel-default">
+                        <div class="embed-responsive embed-responsive-16by9">
+                              <iframe class="embed-responsive-item" src="{{ video.link }}" allowfullscreen></iframe>
+                        </div>
+                        <div class="panel-body">
+                            {{ video.text }}
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-xs-12 col-sm-12">
+                    <h2>Em breve teremos conteudo nessa sessão!</h2>
+                    <hr>
+                </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+      
+    </section><!-- FIM SESSAO CONTEUDO -->
+{% endblock %}
