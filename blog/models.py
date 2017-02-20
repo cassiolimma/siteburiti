@@ -11,6 +11,7 @@ class PostManager(models.Manager):
 
 class Post(models.Model):
 
+	author	=	models.ForeignKey('auth.User')
 	title = models.CharField('Titulo', max_length=100, blank=False)
 	slug = models.SlugField('Slug')
 	text = models.TextField('Texto', blank=False)
